@@ -1,10 +1,14 @@
 <template>
-  <panel title="Register">
-    <v-text-field type="email" name="email" v-model="email" label="Email"></v-text-field>
-    <v-text-field type="password" name="password" v-model="password" label="Password"></v-text-field>
-    <div class="error" v-html="error"></div>
-    <v-btn class="cyan" dark @click="register">Register</v-btn>
-  </panel>
+  <v-layout row justify-center>
+    <v-flex xs6>
+      <panel title="Регистрация">
+        <v-text-field type="email" name="email" v-model="email" label="Email"></v-text-field>
+        <v-text-field type="password" name="password" v-model="password" label="Пароль"></v-text-field>
+        <div class="error-msg" v-html="error"></div>
+        <v-btn class="teal darken-4" dark @click="register">Зарегистрироваться</v-btn>
+      </panel>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -42,5 +46,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.error-msg {
+  color: red;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px;
+}
 </style>
