@@ -1,6 +1,6 @@
 <template>
-  <panel title="Translation">
-    <textarea readonly v-model="translation" cols="40" rows="30"></textarea>
+  <panel title="Перевод">
+    <textarea readonly v-model="translation" rows="30"></textarea>
   </panel>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
-  <panel title="Lyrics">
-      <textarea readonly v-model="lyrics" cols="40" rows="30">
+  <panel title="Текст песни">
+      <textarea readonly v-model="lyrics" rows="30">
       </textarea>
   </panel>
 </template>
@@ -16,4 +16,8 @@ export default {
 }
 </script>
 <style>
+textarea {
+  width: 100%;
+  outline: none;
+}
 </style>
