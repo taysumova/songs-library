@@ -30,7 +30,6 @@
 </template>
 <script>
 import SongsService from '@/services/SongsService'
-import Panel from '@/components/Panel'
 export default {
   data () {
     return {
@@ -47,9 +46,6 @@ export default {
       error: null,
       required: (value) => !!value || 'Необходимо заполнить'
     }
-  },
-  components: {
-    Panel
   },
   methods: {
     async add () {
