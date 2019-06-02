@@ -20,26 +20,88 @@
           <v-btn
             class="teal darken-4 mt-4"
             dark
-            @click="navigateTo({
+            :to="{
               name: 'songs-edit',
-              params: {
-                songId: song.id
+              params() {
+                return {
+                  songId: song.id
+                }
               }
-            })">
+            }">
             Отредактировать
+          </v-btn>
+          <v-btn
+            v-if="isUserLoggedIn && !isBookmarked"
+            class="teal darken-4 mt-4"
+            dark
+            @click="bookmark">
+            Добавить в избранное
+          </v-btn>
+          <v-btn
+            v-if="isUserLoggedIn && isBookmarked"
+            class="teal darken-4 mt-4"
+            dark
+            @click="unbookmark">
+            Убрать из избранного
           </v-btn>
         </v-flex>
       </v-layout>
     </panel>
 </template>
 <script>
+import {mapState} from 'vuex'
+import BookmarksService from '@/services/BookmarksService'
+
 export default {
   props: [
     'song'
   ],
+  data () {
+    return {
+      isBookmarked: false
+    }
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
+  },
+  async mounted () {
+    if (!this.isUserLoggedIn) {
+      return
+    }
+
+    try {
+      const bookmark = (await BookmarksService.getBookmarks({
+        songId: this.song.id,
+        userId: this.$store.state.user.id
+      })).data
+      this.isBookmarked = !!bookmark
+      console.log(bookmark)
+    } catch (err) {
+      console.log(err)
+    }
+  },
   methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+    async bookmark () {
+      try {
+        await BookmarksService.addBookmark({
+          songId: this.song.id,
+          userId: this.$store.state.user.id
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async unbookmark () {
+      try {
+        await BookmarksService.deleteBookmark({
+          songId: this.song.id,
+          userId: this.$store.state.user.id
+        })
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }

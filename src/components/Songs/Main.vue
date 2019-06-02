@@ -22,11 +22,6 @@ export default {
   },
   async mounted () {
     this.songs = (await SongsService.getAllSongs()).data
-  },
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
-    }
   }
 }
 </script>
