@@ -8,7 +8,8 @@ export default {
   },
   addBookmark (bookmark) {
     return Api().post('bookmarks', {
-      params: bookmark
+      songId: bookmark.songId,
+      userId: bookmark.userId
     })
   },
   deleteBookmark (bookmarkId) {
