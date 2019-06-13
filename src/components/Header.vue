@@ -17,7 +17,7 @@
         :to="{
           name: 'songs'
         }">
-        Список моих песен
+        Список песен
       </v-btn>
     </v-toolbar-items>
     <v-spacer></v-spacer>

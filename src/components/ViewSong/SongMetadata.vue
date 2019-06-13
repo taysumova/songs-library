@@ -63,7 +63,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'isUserLoggedIn'
+      'isUserLoggedIn',
+      'user'
     ])
   },
   watch: {
@@ -73,12 +74,12 @@ export default {
       }
 
       try {
-        console.log(this.bookmark)
-        this.bookmark = (await BookmarksService.getBookmarks({
-          songId: this.song.id,
-          userId: this.$store.state.user.id
+        const bookmarks = (await BookmarksService.getBookmarks({
+          songId: this.song.id
         })).data
-        console.log(this.bookmark)
+        if (bookmarks.length) {
+          this.bookmark = bookmarks[0]
+        }
       } catch (err) {
         console.log(err)
       }
@@ -88,8 +89,7 @@ export default {
     async setAsBookmark () {
       try {
         this.bookmark = (await BookmarksService.addBookmark({
-          songId: this.song.id,
-          userId: this.$store.state.user.id
+          songId: this.song.id
         })).data
       } catch (err) {
         console.log(err)

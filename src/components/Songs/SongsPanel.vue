@@ -1,5 +1,5 @@
 <template>
-  <panel title="Список моих песен">
+  <panel title="Список песен">
     <v-btn slot="action" class="teal accent-2" fab absolute right light>
       <router-link :to="{name: 'songs-create'}">
         <v-icon>add</v-icon>
